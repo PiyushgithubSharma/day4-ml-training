@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Titanic Survival Prediction</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; }
+      .container { max-width: 600px; margin: 0 auto; }
+      .result { margin-top: 1rem; padding: 1rem; background: #f2f2f2; border-radius: 8px; }
+      label { display: block; margin-bottom: 0.5rem; }
+      input, select { width: 100%; padding: 0.5rem; margin-bottom: 1rem; }
+      button { padding: 0.75rem 1.5rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+      button:hover { background: #0056b3; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Titanic Survival Prediction</h1>
+      <form method="post" action="/predict">
+        <label>Pclass
+          <select name="Pclass">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </label>
+        <label>Sex
+          <select name="Sex">
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+        </label>
+        <label>Age
+          <input type="number" name="Age" min="0" step="1" required>
+        </label>
+        <label>SibSp
+          <input type="number" name="SibSp" min="0" step="1" value="0" required>
+        </label>
+        <label>Parch
+          <input type="number" name="Parch" min="0" step="1" value="0" required>
+        </label>
+        <label>Fare
+          <input type="number" name="Fare" min="0" step="0.01" value="32.20" required>
+        </label>
+        <label>Embarked
+          <select name="Embarked">
+            <option value="S">S</option>
+            <option value="C">C</option>
+            <option value="Q">Q</option>
+          </select>
+        </label>
+        <button type="submit">Predict Survival</button>
+      </form>
+      {% if prediction %}
+        <div class="result">
+          <h2>Prediction</h2>
+          <p><strong>{{ prediction }}</strong></p>
+          <p>Survival probability: {{ probability }}%</p>
+        </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
